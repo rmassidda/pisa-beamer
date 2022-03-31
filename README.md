@@ -1,6 +1,6 @@
 # Pisa - Beamer Template
 
-![University of Pisa](cherubini/black.png)
+![University of Pisa](cherubini/light.png)
 
 A template for presentations given by members of the University of Pisa based on the Metropolis template.
 
