@@ -1,188 +1,60 @@
-\documentclass[8pt,xcolor=svgnames, compress]{beamer} 
+\documentclass[8pt, xcolor=svgnames, compress]{beamer} 
 
 % Packages
-\usepackage{comment}
-\usepackage{appendixnumberbeamer} 
-\usepackage{amsmath,amssymb}
-\usepackage{slashed}
-\usepackage{verbatim}
-\usepackage{relsize}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{multicol}
-\usepackage{booktabs}
-\usepackage[scale=2]{ccicons}
-\usepackage{geometry}
-\usepackage{xspace}
-\usepackage{tikz}
-\usetikzlibrary{math,calc,shapes,intersections,through,backgrounds}
-\newcommand{\themename}{\textbf{\textsc{bluetemp}\xspace}}
-
-\usefonttheme[onlymath]{serif}
-
-% ceil and floor symbols
-\usepackage{mathtools}
-\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
-\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage{csquotes}
+\usepackage{emoji}
 
 % Bibliography
 \usepackage{biblatex}
-\usepackage{csquotes}
 \addbibresource{bibliography.bib}
 
-\usetheme[progressbar=frametitle,titleformat frame=smallcaps,numbering=counter]{metropolis} 
-\useoutertheme[subsection=false]{miniframes} 
-\setbeamerfont{title}{size=\huge}
+% Theme
+\input{theme/pisa.tex}
 
-%-------------------------------------------------------------------------------------------
-%----------------------------------------- Colors ------------------------------------------
-%-------------------------------------------------------------------------------------------
-
-%\definecolor{main}{RGB}{22, 74, 116} % Blue UNIPI
-\definecolor{main}{RGB}{46, 46, 46} % Grey
-
-% Palette Orange-Blue-Green
-\definecolor{color1}{RGB}{222, 134, 57} % Orange
-\definecolor{color2}{RGB}{0, 156, 191} % blue
-\definecolor{color3}{RGB}{0, 204, 153} % green
-
-% Palette DarkRed-DarkTeal-Gray
-%\definecolor{color1}{RGB}{145, 12, 7} % Dark Red
-%\definecolor{color2}{RGB}{45, 129, 131} % Dark Teal
-%\definecolor{color3}{RGB}{64, 64, 64} % Gray
-
-% Palette black-red
-%\definecolor{color1}{RGB}{0, 0, 0} % Black
-%\definecolor{color2}{RGB}{145, 12, 7} % Dark Red
-%\definecolor{color3}{RGB}{64, 64, 64} % Gray
-
-
-\setbeamercolor{progress bar}{fg=color1}
-\setbeamercolor{title separator}{fg=color1} 
-\setbeamercolor{structure}{fg=black} 
-\setbeamercolor{normal text}{fg=black!87} 
-\setbeamercolor{alerted text}{fg=color1} 
-\setbeamercolor{example text}{fg=color1} 
-\setbeamercolor{palette primary}{bg=white, fg=color1} 
-\setbeamercolor{palette secondary}{bg=main, fg=white}
-\setbeamercolor{palette tertiary}{bg=white, fg=main}
-\setbeamercolor{section in toc}{fg=main!40!Black} 
-\setbeamercolor{background canvas}{bg=white}
-
-
-%-------------------------------------------------------------------------------------------
-%---------------------------------- Customize Blocks ---------------------------------------
-%-------------------------------------------------------------------------------------------
-
-\usepackage{tcolorbox}
-
-\newtcolorbox{mybox}[1][Block:]{
-colback=white,
-colbacktitle=white,
-coltitle=main,
-colframe=main,
-boxrule=0.7pt,
-titlerule=0pt,
-arc=10pt,
-title=\textbf{\strut#1}
-}
-
-
-\newtcolorbox{myabox}[1][Alerted Block:]{
-colback=white,
-colbacktitle=white,
-coltitle=color1,
-colframe=color1,
-boxrule=0.7pt,
-titlerule=0pt,
-arc=10pt,
-title=\textbf{\strut#1}
-}
-
-\newtcolorbox{myebox}[1][Example Block:]{
-colback=white,
-colbacktitle=white,
-coltitle=color3,
-colframe=color3,
-boxrule=0.7pt,
-titlerule=0pt,
-arc=10pt,
-title=\textbf{\strut#1}
-}
-
-% Footnote
-\makeatletter
-\def\blfootnote{\xdef\@thefnmark{}\@footnotetext}
-\makeatother
-
-%-------------------------------------------------------------------------------------------
-%----------------------------------------- Title -------------------------------------------
-%-------------------------------------------------------------------------------------------
-
+% Title
 \title{Title}
+
+% Subtitle
+\subtitle{Subtitle}
+
+% Author
 \author[Name]{
   {\large \textbf{Riccardo Massidda}}\\
   \href{mailto:riccardo.massidda@phd.unipi.it}{\textcolor{main}{riccardo.massidda@phd.unipi.it}}\\
-  % \href{https://pages.di.unipi.it/massidda/}{\textcolor{main}{https://pages.di.unipi.it/}}
 }
-\subtitle{Subtitle}
+
+% Institution
 \institute[uni]{\large Department of Computer Science\\University of Pisa}
+
+% Date
 \date{\today}
+
+% Logo
 \titlegraphic{\vspace{5cm}\hfill\includegraphics[scale=0.23]{cherubini/black.pdf}} 
 
-\setbeamertemplate{subsection in toc}[ball unnumbered]
-
 \begin{document}
-{
+
 \maketitle
-}
-
-
-%-------------------------------------------------------------------------------------------
-%---------------------------------------- Outline ------------------------------------------
-%-------------------------------------------------------------------------------------------
 
 \begin{frame}{Outline}
-  \setbeamertemplate{section in toc}[sections numbered] 
   \setbeamerfont{section in toc}{series=\bf}
+  \setbeamertemplate{section in toc}[sections numbered] 
+  \setbeamertemplate{subsection in toc}[ball unnumbered]
   \tableofcontents[hideallsubsections]
   % \tableofcontents
 \end{frame}
 
-%-------------------------------------------------------------------------------------------
-%------------------------------------ Include sections -------------------------------------
-%-------------------------------------------------------------------------------------------
+\section{Lorem Ipsum}
 
-\include{sections/lorem.tex}
+\input{sections/lorem.tex}
 
-%-------------------------------------------------------------------------------------------
-%------------------------------------------ End --------------------------------------------
-%-------------------------------------------------------------------------------------------
+\section{Math}
+
+\input{sections/math.tex}
 
 \section*{Conclusion}
 
-\begin{frame}{Conclusion}
-  \definecolor{DarkGreen}{rgb}{0,0.5,0}
-  \centering
-  \begin{columns}
-    \begin{column}{0.6\textwidth}
-      \begin{itemize}
-        \setbeamercolor{itemize item}{fg=DarkGreen}
-        \item Stuff we liked.
-        \setbeamercolor{itemize item}{fg=red}
-        \item Stuff we do not liked.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.4\textwidth}
-      \pause\textbf{Riccardo Massidda}\\
-      {Università di Pisa}\\
-      {Department of Computer Science}\\
-      {Office 298B, 2nd Floor}\\[1em]
-      \href{mailto:riccardo.massidda@phd.unipi.it}{riccardo.massidda@phd.unipi.it}
-      \href{https://pages.di.unipi.it/massidda/}{pages.di.unipi.it/massidda/}
-    \end{column}
-  \end{columns}
-\end{frame}
+\input{sections/conclusion.tex}
 
 \section*{References}
 
