@@ -8,10 +8,8 @@
 \input{theme/pisa.tex}
 
 % Title
-\title{Title}
-
-% Subtitle
-\subtitle{Subtitle}
+\title{An Astonishing Title}
+\subtitle{With a Sensational Subtitle}
 
 % Author
 \author[Name]{
@@ -29,30 +27,10 @@
 
 \maketitle
 
-\begin{frame}{Outline}
-  \setbeamerfont{section in toc}{series=\bf}
-  \setbeamertemplate{section in toc}[sections numbered] 
-  \setbeamertemplate{subsection in toc}[ball unnumbered]
-  \tableofcontents[hideallsubsections]
-  % \tableofcontents
-\end{frame}
-
-\section{Lorem Ipsum}
-
+\input{sections/outline.tex}
 \input{sections/lorem.tex}
-
-\section{Math}
-
 \input{sections/math.tex}
-
-\section*{Conclusion}
-
 \input{sections/conclusion.tex}
-
-\section*{References}
-
-\begin{frame}[plain]{References}
-    \printbibliography[heading=none]
-\end{frame}
+\input{sections/references.tex}
 
 \end{document}
