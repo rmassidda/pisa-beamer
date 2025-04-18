@@ -1,5 +1,16 @@
 \usetheme[progressbar=frametitle,titleformat frame=smallcaps,numbering=counter]{metropolis}
-\useoutertheme[subsection=false]{miniframes}
+
+\RequirePackage{amssymb} % Must be loaded before unicode-math
+\RequirePackage[force]{filehook} % Fixes an error
+\RequirePackage{mathtools}
+\RequirePackage{centernot}
+\RequirePackage{unicode-math} % Math fonts in xetexorluatex
+
+% Changed font compared to the original
+\setmathfont{Libertinus Math} % Libertinus Math font
+
+\setmathfont[range={\mathcal,\mathbfcal}]{cmsy10}
+\setmathfont[range={\mathbb}]{New Computer Modern Math}
 
 % Emoji
 \usepackage{emoji}
@@ -7,65 +18,33 @@
 % Font
 \usepackage{inter}
 
+% Size of paragraph skip
+\usepackage{parskip}
+\setlength{\parskip}{1em}
+
 % Bisturi Palette
-%\definecolor{main}{RGB}{22, 74, 116} % Blue UNIPI
+\definecolor{unipi}{RGB}{22, 74, 116} % Blue UNIPI
+\definecolor{main}{RGB}{22, 74, 116} % Blue UNIPI
 % \definecolor{main}{RGB}{46, 46, 46} % Grey
-\definecolor{main}{RGB}{64, 64, 64} % Grey
+% \definecolor{main}{RGB}{64, 64, 64} % Grey
 \definecolor{color1}{RGB}{66, 133, 244} % Blue
 \definecolor{color2}{RGB}{222, 134, 57} % Orange
 \definecolor{color3}{RGB}{0, 204, 153} % green
 
 % Colors
-\setbeamercolor{progress bar}{fg=color1}
-\setbeamercolor{title separator}{fg=color1}
+\setbeamercolor{progress bar}{fg=unipi}
+\setbeamercolor{title separator}{fg=unipi}
 \setbeamercolor{structure}{fg=main}
 \setbeamercolor{normal text}{fg=main}
-\setbeamercolor{alerted text}{fg=color1}
-\setbeamercolor{example text}{fg=color1}
-\setbeamercolor{palette primary}{bg=white, fg=color1}
+\setbeamercolor{alerted text}{fg=unipi}
+\setbeamercolor{example text}{fg=unipi}
+\setbeamercolor{palette primary}{bg=white, fg=unipi}
 \setbeamercolor{palette secondary}{bg=main, fg=white}
 \setbeamercolor{palette tertiary}{bg=white, fg=main}
 \setbeamercolor{section in toc}{fg=main}
 \setbeamercolor{background canvas}{bg=white}
-
-% Blocks
-\usepackage{tcolorbox}
-
-\newtcolorbox{mybox}[1][Block:]{
-coltext=main,
-colback=white,
-colbacktitle=white,
-coltitle=main,
-colframe=main,
-boxrule=0.7pt,
-titlerule=0.2pt,
-arc=1pt,
-title=\textbf{\strut#1}
-}
-
-\newtcolorbox{myabox}[1][Alerted Block:]{
-coltext=main,
-colback=white,
-colbacktitle=white,
-coltitle=color1,
-colframe=color1,
-boxrule=0.7pt,
-titlerule=0.2pt,
-arc=1pt,
-title=\textbf{\strut#1}
-}
-
-\newtcolorbox{myebox}[1][Example Block:]{
-coltext=main,
-colback=white,
-colbacktitle=white,
-coltitle=color2,
-colframe=color2,
-boxrule=0.7pt,
-titlerule=0.2pt,
-arc=1pt,
-title=\textbf{\strut#1}
-}
+%\setbeamerfont{subsection in toc}{size=\Large}
+% \setbeamercolor{frametitle}{fg=white,bg=color1}
 
 % Footnote
 \makeatletter
@@ -83,18 +62,18 @@ title=\textbf{\strut#1}
   \nointerlineskip%
   \begin{beamercolorbox}[%
       wd=\paperwidth,%
-      sep=0pt,%
+      sep=0.1em,%
       leftskip=\metropolis@frametitle@padding,%
       rightskip=\metropolis@frametitle@padding,%
     ]{frametitle}%
-  \metropolis@frametitlestrut@start%
-  \insertframetitle%
-  \ifx\insertframesubtitle\empty%
-  \else%
-    \\[-0.2em]\normalfont{\normalsize\insertframesubtitle}%
-  \fi%
-  \nolinebreak%
-  \metropolis@frametitlestrut@end%
+    \metropolis@frametitlestrut@start%
+    \insertframetitle%
+    \ifx\insertframesubtitle\empty%
+    \else%
+      \hfill\normalfont{\normalsize\insertframesubtitle}%
+    \fi%
+    \nolinebreak%
+    \metropolis@frametitlestrut@end%
   \end{beamercolorbox}%
 }
 \makeatother
@@ -103,5 +82,49 @@ title=\textbf{\strut#1}
   \usebeamertemplate*{progress bar in head/foot}
 }
 
+% Section Page
+\makeatletter
+\defbeamertemplate{section page}{fulltitleprogressbar}{
+  \setbeamercolor{background canvas}{bg=unipi}
+  \centering
+  \begin{minipage}{30em}
+    \raggedright{}
+    \usebeamercolor[white]{section title}
+    \usebeamerfont{section title}
+    % Instead of inserting the section head here,
+    % as in \insertsectionhead\\[-1ex],
+    % we insert the full title of the section.
+    % Get section number
+    %\huge\thesection. \insertsection\\[-1ex]
+    \huge\insertsection\\[-1ex]
+    \usebeamertemplate*{progress bar in section page}
+    \par
+    \ifx\insertsubsectionhead\@empty\else%
+      \usebeamercolor[white]{subsection title}%
+      \usebeamerfont{subsection title}%
+      \insertsubsectionhead{}
+    \fi
+  \end{minipage}
+  \par
+  \vspace{\baselineskip}
+}
+\makeatother
+\setbeamertemplate{section page}[fulltitleprogressbar]
+
+\AtBeginSection[]{
+  % Set colors
+  %\setbeamercolor{background canvas}{bg=unipi}
+  %\setbeamercolor{progress bar}{fg=white}
+
+  \begin{frame}[plain,c,noframenumbering]
+    %\usebeamertemplate{section page}
+    \textbf{\tableofcontents[currentsection]}
+  \end{frame}
+
+  % Revert
+  %\setbeamercolor{background canvas}{bg=white}
+  %\setbeamercolor{progress bar}{fg=unipi}
+}
+
 % Logo
-\titlegraphic{\vspace{4cm}\hfill\includegraphics[scale=0.21]{theme/light_blue.png}}
+\titlegraphic{\vspace{4cm}\hfill\includegraphics[width=14em]{theme/marchio.pdf}}
